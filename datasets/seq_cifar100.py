@@ -43,6 +43,7 @@ class SequentialCIFAR100(ContinualDataset):
 
         train, memory, test = store_masked_loaders(train_dataset, test_dataset, memory_dataset, self)
         return train, memory, test
+    # memory暂时应该是用不到
     
     def get_transform(self, args):
         cifar_norm = [[0.4914, 0.4822, 0.4465], [0.2470, 0.2435, 0.2615]]

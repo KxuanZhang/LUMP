@@ -97,7 +97,7 @@ def main(device, args):
             data_dict = model.observe(images1, labels, images2, notaug_images)
             logger.update_scalers(data_dict)
 
-        global_progress.set_postfix(data_dict)
+        global_progress.set_postfix(data_dict)    #显示在进度条的右侧显示额外的信息，例如指标的值、当前状态或其他相关信息
 
         # if args.train.knn_monitor and epoch % args.train.knn_interval == 0: 
         if (epoch + 1) == args.train.stop_at_epoch:

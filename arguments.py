@@ -42,13 +42,13 @@ def set_deterministic(seed):
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--config-file', required=True, type=str, help="xxx.yaml")
+    parser.add_argument('-c', '--config-file', default='configs/simsiam_c10.yaml', type=str, help="xxx.yaml")
     parser.add_argument('--debug', action='store_true')
     parser.add_argument('--debug_subset_size', type=int, default=8)
     parser.add_argument('--download', action='store_true', help="if can't find dataset, download from web")
-    parser.add_argument('--data_dir', type=str, default=os.getenv('DATA'))
-    parser.add_argument('--log_dir', type=str, default=os.getenv('LOG'))
-    parser.add_argument('--ckpt_dir', type=str, default=os.getenv('CHECKPOINT'))
+    parser.add_argument('--data_dir', type=str, default='../Data/')
+    parser.add_argument('--log_dir', type=str, default='../logs/')
+    parser.add_argument('--ckpt_dir', type=str, default='./checkpoints/cifar10_results/')
     parser.add_argument('--ckpt_dir_1', type=str, default=os.getenv('CHECKPOINT'))
     parser.add_argument('--device', type=str, default='cuda'  if torch.cuda.is_available() else 'cpu')
     parser.add_argument('--eval_from', type=str, default=None)
