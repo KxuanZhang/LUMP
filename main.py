@@ -8,7 +8,7 @@ from tqdm import tqdm
 from arguments import get_args
 from augmentations import get_aug
 from models import get_model
-from tools import AverageMeter, knn_monitor, Logger, file_exist_check
+from tools import AverageMeter, knn_monitor, Logger, file_exist_check, set_random_seed
 from datasets import get_dataset
 from datetime import datetime
 from utils.loggers import *
@@ -95,6 +95,7 @@ def main(device, args):
         local_progress=tqdm(train_loaders[t], desc=f'Epoch {epoch}/{args.train.num_epochs}', disable=args.hide_progress)
         for idx, ((images1, images2, notaug_images), labels) in enumerate(local_progress):
             data_dict = model.observe(images1, labels, images2, notaug_images)
+            print(data_dict)
             logger.update_scalers(data_dict)
 
         global_progress.set_postfix(data_dict)    #显示在进度条的右侧显示额外的信息，例如指标的值、当前状态或其他相关信息
@@ -139,6 +140,7 @@ def main(device, args):
 
 if __name__ == "__main__":
     args = get_args()
+    set_random_seed(0)
     main(device=args.device, args=args)
     completed_log_dir = args.log_dir.replace('in-progress', 'debug' if args.debug else 'completed')
     os.rename(args.log_dir, completed_log_dir)
